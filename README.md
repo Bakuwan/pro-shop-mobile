@@ -6,6 +6,7 @@
 <details>
 <summary>
 Tugas 7: Elemen Dasar Flutter
+</summary>
 
 ##  Jelaskan apa yang dimaksud dengan stateless widget dan stateful widget, dan jelaskan perbedaan dari keduanya.
 
@@ -137,5 +138,71 @@ class ItemCard extends StatelessWidget {
   }
 }
 ```
+</details>
+
+<details>
+<summary>
+Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements
 </summary>
+
+## Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
+
+Const digunakan untuk membuat nilai yang bersifat immutable sepanjang aplikasi dijalankan. Saat const diterapkan pada widget atau objek, Flutter akan membuatnya hanya sekali di memori sehingga menghemat penggunaan memori dan performa yang lebih baik
+
+Gunakan const pada: nilai-nilai tetap dan widget stateless
+
+Jangan gunakan const pada: nilai dinamis dan widget stateful
+
+## Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+
+Column menyusun widget anaknya secara vertikal sedangkan Row menyusun widget anaknya secara horizontal
+
+Contoh implementasi Column:
+```dart
+Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: <Widget>[
+    Text('Text 1'),
+    Text('Text 2'),
+    Text('Text 3'),
+  ],
+)
+```
+
+Contoh implementasi Row:
+```dart
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceAround,
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: <Widget>[
+    Icon(Icons.star),
+    Text('Star'),
+    Icon(Icons.favorite),
+  ],
+)
+```
+
+##  Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+
+Elemen yang digunakan:
+- TextFormField, digunakan untuk input name, amount, description, dan price
+- ElevatedButton, digunakan pada tombol Save
+
+Elemen yang tidak digunakan:
+- Checkbox
+- Radio
+- DropdownButton
+- Switch
+- Slider
+- DatePicker
+- TimePicker
+- FilePicker
+- dan lain lain yang tidak diperlukan
+
+## Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+Pengimplementasian tema dilakukan pada komponen AppBar, Drawer, dan Button yang menggunakan colorScheme.primary
+
+##  Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+Saya menggunakan `navigator.push` di `ItemCard`. Ketika `Tambah Produk` dipilih, halaman `ProductEntryFormPage` akan dibuka di atas halaman `MyHomePage`. Cara ini dapat diimplementasikan juga jika aplikasi memiliki halaman lain.
 </details>
