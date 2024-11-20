@@ -206,3 +206,95 @@ Pengimplementasian tema dilakukan pada komponen AppBar, Drawer, dan Button yang 
 ##  Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
 Saya menggunakan `navigator.push` di `ItemCard`. Ketika `Tambah Produk` dipilih, halaman `ProductEntryFormPage` akan dibuka di atas halaman `MyHomePage`. Cara ini dapat diimplementasikan juga jika aplikasi memiliki halaman lain.
 </details>
+
+<details>
+<summary> Tugas 9:  Integrasi Layanan Web Django dengan Aplikasi Flutter </summary>
+
+## Jelaskan mengapa kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data JSON? Apakah akan terjadi error jika kita tidak membuat model terlebih dahulu?
+
+Kita perlu membuat model untuk membantu dan memastikan agar data yang diambil/dikirim memiliki struktur konsisten. Dengan model kita bisa mendefinisikan tipe data yang diharapkan.
+
+Aplikasi tidak akan langsung error jika kita tidak membuat model dan langsung memproses JSON tanpa model. Tetapi, hal ini rawan kesalahan terutama jika struktur data JSON kompleks atau data tidak konsisten.
+
+## Jelaskan fungsi dari library http yang sudah kamu implementasikan pada tugas ini
+Fungsi library HTTP adalah untuk menangani HTTP requests. Pada tugas ini, library HTTP digunakan untuk berkomunikasi antara aplikasi Flutter dan backend Django melalui API.
+
+## Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+CookieRequest berfungsi untuk menyimpan dan mengelola cookie dengan setiap permintaan HTTP ke backend.
+
+Instance CookieRequest dibagikan ke semua komponen aplikasi sesi pengguna konsisten dan mempermudah pengelolaan Login/Logout
+
+##  Jelaskan mekanisme pengiriman data mulai dari input hingga dapat ditampilkan pada Flutter.
+
+1. Pengguna mengisi form untuk input data
+2. Data dikirim ke backend menggunakan HTTP Request
+3. Backend menerima dan memproses data
+4. Backend mengirimkan respons
+5. Flutter menangkap respons backend
+6. Flutter meminta data untuk ditampilkan
+7. Data ditampilkan di UI Flutter
+
+## Jelaskan mekanisme autentikasi dari login, register, hingga logout. Mulai dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+
+### Login
+1. Pengguna memasukkan username dan password di form login
+2. Backend Django memproses permintaan
+3. Django mengembalikan respons yang menunjukkan apakah login berhasil atau gagal
+4. Jika login berhasil, Flutter menavigasi pengguna ke halaman utama
+
+### Register
+1. Pengguna memasukkan username, password, dan konfirmasi password di form register
+2. Backend Django akan memproses permintaan
+3. Django mengembalikan respons yang menunjukkan apakah register berhasil atau gagal
+4. Jika register berhasil, pengguna dinavigasi ke halaman login
+
+### Logout
+1. Flutter mengirimkan permintaan logout ke backend
+2. Django memproses permintaan logout
+3. Backend mengembalikan respons JSON yang menunjukkan logout berhasil
+4. Setelah logout sukses Flutter menghapus cookie sesi dan menavigasi pengguna ke halaman login
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).
+
+### Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.
+
+1. Membuat app baru di proyek Django dengan nama `authentication`
+2. Install library `django-cors-header` dan tambahkan line yang diperlukan di `settings.py`
+
+3. Pada proyek flutter install package berikut:
+```
+flutter pub add provider
+flutter pub add pbp_django_auth
+```
+4. Modifikasi root widget untuk menyediakan `CookieRequest` library ke semua child widget
+### Membuat halaman login pada proyek tugas Flutter.
+1. Pada file `authentication/views.py` buatlah sebuah metode view untuk login dan tambahkan routing url nya
+2. Buat file baru di folder `screens` bernama `login.dart`sebagai form untuk login pengguna
+3. Pada file `main.dart` ubah `home : MyPage()` menjadi `home: const LoginPage()` agar pengguna diarahkan ke halaman login
+
+### Mengimplementasikan fitur registrasi akun pada proyek tugas Flutter.
+1. Pada file `authentication/views.py` buatlah sebuah metode view untuk register dan tambahkan routing url nya
+2. Buat file baru di folder `screens` bernama `register.dart`sebagai form untuk pengguna register
+
+###  Membuat model kustom sesuai dengan proyek aplikasi Django.
+1. Buka endpoint JSON di web Django yang sebelumnya sudah dibuat.
+2. gunakan website `QuickType` untuk membuat model berdasarkan kode JSON yang sudah disalin
+3. Buat folder `models` didalam folder `lib` dan letakkan kode model di file baru bernama `product_entry.dart`
+
+### Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy.
+1. Tambahkan package HTTP ke flutter
+2. Tambahkan kode berikut ke `AndroidManifest.xml` agar aplikasi flutter bisa mengakses internet
+```xml
+<uses-permissionandroid:name="androiINTERNET" />
+```
+3. Buat file baru di folder `screens` bernama `list_productentry.dart`
+4. Buat kode untuk menampilkan data dari endpoint JSON di Django.
+
+### Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
+1. Buat file baru di folder `screens` bernama `product_detail.dart` dan tambahkan kode untuk menampilkan detail sebuah produk.
+2. Modifikasi file `list_productentry.dart`, tambahkan navigasi ke `ProductDetailPage` saat produk ditekan.
+
+### Melakukan filter pada halaman daftar item dengan hanya menampilkan item yang terasosiasi dengan pengguna yang login.
+Karena data item sudah di filter dari backend, kita tinggal mengambil data dari endpoint JSON
+
+</details>

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pro_shop/screens/list_productentry.dart';
 import 'package:pro_shop/screens/menu.dart';
 import 'package:pro_shop/screens/productentry_form.dart';
 // TODO: Impor halaman MoodEntryFormPage jika sudah dibuat
@@ -53,7 +54,7 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.shopping_cart_outlined),
+            leading: const Icon(Icons.add_shopping_cart_outlined),
             title: const Text('Tambah Produk'),
             // Bagian redirection ke MoodEntryFormPage
             onTap: () {
@@ -65,6 +66,17 @@ class LeftDrawer extends StatelessWidget {
               );
             },
           ),
+            ListTile(
+            leading: const Icon(Icons.shopping_cart_outlined),
+            title: const Text('Daftar Produk'),
+            onTap: () {
+              // Route menu ke halaman mood
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ProductEntryPage()),
+              );
+            },
+            ),
         ],
       ),
     );
